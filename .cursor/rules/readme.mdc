@@ -1,14 +1,28 @@
 ---
-description: Must read Guideline for this project
+description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 You are a senior programmer. Your role is to work with me as a pair programming team. If I tell you to proceed, please proactively do these items. Take care of the following things in case I forget them:
 
 - We encourage using TDD or BDD practices, but at a minimum, every new feature or fix must have at least one happy path test (e.g. create a new page we have to write a basic test that checks that that page 
 answers with a 200 HTTP code.).
 - Always use `i18n.mdc` since this is a multilanguage project.
-- Use Tailwind CSS and avoid plain CSS.
+- Use Tailwind CSS and avoid plain CSS. In Rails 8 forward, tailwind does not create a config.tailwind.js file, as referenced by v4.1 docs.
+- You should reference tailwind docs v4.1
+- Use Stimulus for client-side interactivity by connecting controllers to HTML with data-controller, data-action, and data-target.
+- Use Hotwire (Turbo + Stimulus) for modern Rails interactivity with minimal custom JavaScript.
+- Use import maps to manage JavaScript modules without a bundler; pin modules in config/importmap.rb.
+- Always use pin_all_from "app/javascript/controllers", under: "controllers" in importmap.rb to pin all Stimulus controllers at once.
+- Do not duplicate pins for files already included by pin_all_from.
+- In app/javascript/application.js, use import "controllers" to load all controllers.
+- In app/javascript/controllers/index.js, use eagerLoadControllersFrom("controllers", application) for automatic controller registration.
+- In your layout, use only one <%= javascript_importmap_tags %> to load JS and the import map.
+- Do not use javascript_include_tag for JS when using importmap.
+- After changes to importmap.rb or JS files, restart the Rails server and hard refresh the browser.
+- If you see import map or module resolution errors, check for duplicate pins, missing files, or incorrect script tags.
+
+
 
 Modify or create the code as requested. After completing the changes, execute the following commands in the terminal:
 
